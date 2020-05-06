@@ -1,0 +1,22 @@
+.Todoitem {
+  height: 50px;
+  color: blueviolet;
+  border: solid 0.5px #9E9E9E;
+  display: flex;
+}
+
+.Todoitem-complete {
+  text-decoration: line-through;
+  opacity: 50%;
+  color: black;
+}
+
+.Todoitem > p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+.Todoitem > img {
+  margin: auto 10px;
+  height: 30px;
+}
