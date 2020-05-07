@@ -1,15 +1,15 @@
 .Display {
-  display: flex;
-  justify-content: flex-end;
+  margin: 10px 0px;
 }
 
 .Display > input {
+  font-size: 30px;
   border: none;
-  text-align: right;
-  height: 50px;
-  margin-right: 10px;
+  margin-left: 10px;
+  width: 220px;
+  overflow-x: auto;
 }
 
-.Display > input:focus {
+.Display >input:focus {
   outline: none;
 }

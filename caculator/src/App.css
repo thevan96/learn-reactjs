@@ -1,15 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   border: solid 1px black;
-  width: 400px;
-  margin: auto;
+  width: 300px;
+  margin: 50px auto;
 }
 
 .Board {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-}
-
-.Button-0 {
-  grid-column-start: 1;
-  grid-column-end: 3;
+  width: 100px;
+  text-align: center;
 }

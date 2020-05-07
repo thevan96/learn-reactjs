@@ -3,9 +3,14 @@ import './Display.css';
 
 class Display extends React.Component {
   render() {
+    const {result, onChange} = this.props;
     return (
       <div className="Display">
-        <input type="text" name="" id="" defaultValue="0"/>
+        <input type="text"
+          name=""
+          value={result}
+          onChange={onChange}
+        />
       </div>
     )
   }

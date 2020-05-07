@@ -3,12 +3,12 @@ import './Button.css';
 
 class Button extends React.Component {
   render() {
-    const {onClick} = this.props.item;
-    const className = `Button Button-${this.props.item.name}`
-
+    const { label, onClick } = this.props;
     return (
-      <button className={className} onClick={onClick}>
-          {this.props.item.display}
+      <button className="Button"
+        onClick={onClick}
+        value={label}>
+        {label}
       </button>
     )
   }
