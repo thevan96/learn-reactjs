@@ -4,148 +4,184 @@ import Button from './component/Button/Button';
 import './App.css';
 
 class App extends React.Component {
-  constructor() {
+  constructor () {
     super();
     this.state = {
-      operator: null,
-      result: "0",
-      value: "0",
-    }
+      input: '0',
+      width: 30
+    };
 
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
-  caculator(a, b, operator) {
+  calc () {
+    const numbers = this.state.input.split(/\+|\-|\x|\÷/g);
+    const operators = this.state.input.replace(/[0-9]|\./g, '').split('');
 
-    if (operator === '=') {
-      return -1;
-    }
-
-    const calc = {
-      '+': a + b,
-      '-': a - b,
-      '/': a / b,
-      '*': a * b,
-    }
-
-    return calc[operator];
-  }
-
-  handleOnClick(e) {
-    const button = e.target.value.trim();
-    let { result, value, operator } = this.state;
-
-    if (/[0-9]/.test(button)) {
-      if (!operator) {
+    let posDiv = operators.indexOf('÷');
+    while (posDiv !== -1) {
+      if (numbers[posDiv + 1] === '0') {
         this.setState({
-          result: result === '0' ? '' + button : result + button
-        })
-      } else {
-        this.setState({
-          value: value === '0' ? '' + button : value + button
-        })
+          input: 'Error not div zero'
+        });
+        return;
       }
-    } else {
-      if (operator !== null) {
-        const temp = this.caculator(parseInt(result), parseInt(value), operator);
-        if (temp !== -1) {
-          this.setState({
-            result: this.caculator(parseInt(result), parseInt(value), operator),
-            value: "0"
-          })
-        } else {
-          this.setState({
-            value: "0"
-          })
-        }
-      }
-      this.setState({
-        operator: button
-      })
+      numbers.splice(posDiv, 2, numbers[posDiv] / numbers[posDiv + 1]);
+      operators.splice(posDiv, 1);
+      posDiv = operators.indexOf('÷');
     }
 
-  }
+    let postMul = operators.indexOf('x');
+    while (postMul !== -1) {
+      numbers.splice(postMul, 2, numbers[postMul] * numbers[postMul + 1]);
+      operators.splice(postMul, 1);
+      postMul = operators.indexOf('x');
+    }
 
-  handleOnChange(e) {
-    const button = e.target.value.trim();
+    let posAdd = operators.indexOf('+');
+    while (posAdd !== -1) {
+      numbers.splice(
+        posAdd,
+        2,
+        parseFloat(numbers[posAdd]) + parseFloat(numbers[posAdd + 1])
+      );
+      operators.splice(posAdd, 1);
+      posAdd = operators.indexOf('+');
+    }
+
+    let posSub = operators.indexOf('-');
+    while (posSub !== -1) {
+      numbers.splice(posSub, 2, numbers[posSub] - numbers[posSub + 1]);
+      operators.splice(posSub, 1);
+      posSub = operators.indexOf('-');
+    }
+
     this.setState({
-      // value: this.state.value + button
-    })
+      input: '' + numbers[0]
+    });
   }
 
-  render() {
-    const { result } = this.state;
+  clear () {
+    this.setState({
+      input: '0'
+    });
+  }
+
+  parternInsertNumber () {
+    const partern = new RegExp(
+      '([+-]*)(0.)([0-9]*)|([+-]*)([1-9]*)(.*)([0-9]+)([+-÷x]*)'
+    );
+    return partern.test(this.state.input);
+  }
+
+  parternInsertOperator () {
+    const partern = new RegExp('[0-9]');
+    return partern.test(this.state.input[this.state.input.length - 1]);
+  }
+
+  isNumber (item) {
+    const partern = new RegExp('[0-9]');
+    return partern.test(item);
+  }
+
+  isOperator (operator) {
+    const partern = new RegExp('[+-÷x]');
+    return partern.test(operator);
+  }
+
+  delete () {
+    if (this.isNumber(this.state.input) && this.state.input.length > 1) {
+      this.setState({
+        input: this.state.input.substring(0, this.state.input.length - 1)
+      });
+    }
+  }
+
+  handleOnClick (e) {
+    const { input } = this.state;
+    const button = e.target.value.trim('');
+    const lastItem = input[input.length - 1];
+
+    const posDot = input.indexOf('.');
+    console.log(posDot);
+
+
+    if (button === 'C') {
+      this.delete();
+      return;
+    }
+
+    if (button === 'AC') {
+      this.clear();
+      return;
+    }
+
+    if (button === '=' && this.isNumber(lastItem)) {
+      this.calc();
+      return;
+    }
+
+    if (button === '.' && posDot === -1 && this.isNumber(lastItem)) {
+      this.setState({
+        input: input + button
+      });
+    }
+
+    if (this.isNumber(button) && this.parternInsertNumber()) {
+      this.setState({
+        input: input === '0' ? button : input + button
+      });
+      return;
+    }
+
+    if (this.isOperator(button) && this.parternInsertOperator()) {
+      this.setState({
+        input: input + button
+      });
+    }
+  }
+
+  handleOnChange (e) {}
+
+  render () {
+    const { input, width } = this.state;
     return (
-      <div className="App">
-        <Display
-          result={result}
-          onChange={this.handleOnChange}
-        />
-        <table className="Board">
-          <tbody>
-            <tr>
-              <td>
-                <Button label={7}
-                  onClick={this.handleOnClick}
-                />
-              </td>
-              <td>
-                <Button label={8} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={9} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={"/"} onClick={this.handleOnClick} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Button label={4} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={5} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={6} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={"*"} onClick={this.handleOnClick} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Button label={1} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={2} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={3} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={"-"} onClick={this.handleOnClick} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Button label={0} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={"."} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={"="} onClick={this.handleOnClick} />
-              </td>
-              <td>
-                <Button label={"+"} onClick={this.handleOnClick} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div className='App'>
+        <Display result={input} onChange={this.handleOnChange} width={width} />
+        <hr />
+        <div className='Board'>
+          <div className='Board-row'>
+            <Button label='AC' onClick={this.handleOnClick} />
+            <Button label='C' onClick={this.handleOnClick} />
+          </div>
+          <div className='Board-row'>
+            <Button label='7' onClick={this.handleOnClick} />
+            <Button label='8' onClick={this.handleOnClick} />
+            <Button label='9' onClick={this.handleOnClick} />
+            <Button label='+' onClick={this.handleOnClick} />
+          </div>
+          <div className='Board-row'>
+            <Button label='4' onClick={this.handleOnClick} />
+            <Button label='5' onClick={this.handleOnClick} />
+            <Button label='6' onClick={this.handleOnClick} />
+            <Button label='-' onClick={this.handleOnClick} />
+          </div>
+          <div className='Board-row'>
+            <Button label='1' onClick={this.handleOnClick} />
+            <Button label='2' onClick={this.handleOnClick} />
+            <Button label='3' onClick={this.handleOnClick} />
+            <Button label='÷' onClick={this.handleOnClick} />
+          </div>
+          <div className='Board-row'>
+            <Button label='0' onClick={this.handleOnClick} />
+            <Button label='.' onClick={this.handleOnClick} />
+            <Button label='=' onClick={this.handleOnClick} />
+            <Button label='x' onClick={this.handleOnClick} />
+          </div>
+        </div>
       </div>
-    )
+    );
   }
 }
 
