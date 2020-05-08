@@ -4,11 +4,16 @@
 
 .App {
   border: solid 1px black;
-  width: 300px;
+  width: fit-content;
   margin: 50px auto;
 }
 
 .Board {
-  width: 100px;
+  width: fit-content;
   text-align: center;
+}
+
+.Board-row {
+  display: flex;
+  justify-content: space-between;
 }
