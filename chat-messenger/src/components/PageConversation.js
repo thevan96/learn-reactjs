@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { Row, Col, Input } from 'reactstrap';
+import { Row, Col, Input, Form } from 'reactstrap';
+import { connect } from 'react-redux';
 
-import store from '../store';
 import Message from './Message';
-
 import { messagesApi } from '../api';
-
 import { styleIcon } from '../style';
+
 
 
 import camera from '../images/camera.svg';
@@ -24,12 +23,30 @@ class PageConversation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      idConversation: store.getState().idConversation
+      message: ''
     }
   }
 
+  handleOnChange = e => {
+    const text = e.target.value.trim()
+    this.setState({
+      message: text
+    })
+  }
+
+  handleOnSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.message);
+    this.setState({
+      messages: ''
+    })
+    console.log(this.state.message);
+  }
+
+
   render() {
-    const messages = messagesApi.getMessageByRoom(store.getState().idConversation)
+    const { idConversation } = this.props;
+    const messages = messagesApi.getMessageByRoom(idConversation)
 
     return (
       <Col sx='8' className='PageConversation'>
@@ -53,17 +70,24 @@ class PageConversation extends React.Component {
             </Row>
           </Col>
         </Row>
-        <Row style={{ minHeight: "530px" }}>
+
+        <Row style={{ minHeight: "600px" }}>
           <Col>
             {
               messages.map((e, index) => <Message key={index} message={e} />)
             }
           </Col>
         </Row>
+
         <Row>
           <Col>
             <Row style={{ flexWrap: "nowrap" }}>
-              <Input placeholder='Type a message' style={{ marginRight: 8 }} />
+              <Form onSubmit={this.handleOnSubmit} >
+                <Input placeholder='Type a message'
+                  style={{ marginRight: 8 }}
+                  value={this.state.message}
+                  onChange={this.handleOnChange} />
+              </Form>
 
               <Link to='/' style={{ marginRight: 8 }} >
                 <img src={camera} alt='camera' style={styleIcon} />
@@ -88,4 +112,10 @@ class PageConversation extends React.Component {
   }
 }
 
-export default PageConversation;
+const mapStateToProps = (state, ownProps) => (
+  {
+    idConversation: state.idConversation
+  }
+)
+
+export default connect(mapStateToProps, null)(PageConversation);

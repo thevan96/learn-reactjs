@@ -56,34 +56,88 @@ export const contactApi = {
 
 export const messagesApi = {
   messages: [
+    // 1-2
     {
       id: 1,
       idSender: 1,
-      content: 'Hello world 1',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam sit amet nisl suscipit adipiscing bibendum est ultricies. In eu mi bibendum neque egestas congue quisque egestas. Diam quis enim lobortis scelerisque.',
       idRoom: 1
     },
     {
       id: 2,
       idSender: 2,
-      content: 'Hello world 2',
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
       idRoom: 2
     },
     {
       id: 3,
       idSender: 2,
-      content: 'Abc',
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
       idRoom: 2
     },
     {
-      id: 3,
+      id: 4,
       idSender: 1,
-      content: 'CDE',
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
       idRoom: 2
     },
+    {
+      id: 4,
+      idSender: 2,
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
+      idRoom: 2
+    },
+    {
+      id: 4,
+      idSender: 2,
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
+      idRoom: 2
+    },
+
+    // 1-3
+    {
+      id: 5,
+      idSender: 1,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam sit amet nisl suscipit adipiscing bibendum est ultricies. In eu mi bibendum neque egestas congue quisque egestas. Diam quis enim lobortis scelerisque.',
+      idRoom: 3
+    },
+    {
+      id: 6,
+      idSender: 3,
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
+      idRoom: 3
+    },
+    {
+      id: 7,
+      idSender: 3,
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
+      idRoom: 3
+    },
+    {
+      id: 8,
+      idSender: 1,
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
+      idRoom: 3
+    },
+    {
+      id: 9,
+      idSender: 2,
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
+      idRoom: 3
+    },
+    {
+      id: 10,
+      idSender: 3,
+      content: 'Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. In nibh mauris cursus mattis molestie a iaculis at. Commodo odio aenean sed adipiscing diam donec adipiscing tristique. Elementum eu facilisis sed odio morbi quis.',
+      idRoom: 3
+    },
+
   ],
 
   getMessageByRoom: function (idRoom) {
-    return this.messages.filter(e => e.idRoom === idRoom);
+    const messages = this.messages.filter(e => e.idRoom === idRoom);
+    if (messages) return messages;
+    return [];
   }
 }
 

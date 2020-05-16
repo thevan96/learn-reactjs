@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { idConversation } from './conversations';
+import { messages } from './messages';
 
 const reducers = combineReducers({
-  idConversation
+  idConversation,
+  messages
 })
 
 export default reducers;

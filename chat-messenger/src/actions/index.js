@@ -3,9 +3,14 @@ export const switchUser = userId => ({
   userId
 })
 
-export const chat = text => ({
-  type: 'CHAT',
+export const sendMessage = text => ({
+  type: 'SEND_MESSAGE',
   text
+})
+
+export const deleteMessage = id => ({
+  type: 'DELETE_MESSAGE',
+  id
 })
 
 export const DEFAULT_USER = {

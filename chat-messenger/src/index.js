@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 import store from './store';
 
+const rootElement = document.getElementById('root');
 
 ReactDOM.render(
   <Router>
@@ -17,7 +18,7 @@ ReactDOM.render(
       </React.StrictMode>
     </Provider>
   </Router>,
-  document.getElementById('root')
+  rootElement
 );
 
 // If you want your app to work offline and load faster, you can change

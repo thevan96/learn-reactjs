@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Form, FormGroup } from 'reactstrap';
 import { Col, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import add from '../images/add.svg';
 import setting from '../images/setting.svg';
@@ -9,8 +10,6 @@ import { styleIcon } from '../style';
 
 import { contactApi } from '../api';
 import { switchUser } from '../actions';
-
-import store from '../store';
 
 const contactStyle = {
   display: 'flex',
@@ -53,6 +52,7 @@ class PageContact extends React.Component {
 
   render() {
     const { inputValue, contacts } = this.state;
+    const { onClick } = this.props;
 
     return (
       <Col xs='4' className='PageContact'>
@@ -61,6 +61,7 @@ class PageContact extends React.Component {
             <Link to='/'>
               <img src={setting} alt='setting' style={styleIcon} />
             </Link>
+
             <b>Messenger</b>
 
             <Link to='/'>
@@ -94,10 +95,7 @@ class PageContact extends React.Component {
           <Col>
             {
               contacts.map((e, index) => (
-                <Link key={index} to={'/'} onClick={() => {
-                  store.dispatch(switchUser(e.id))
-                  console.log(store.getState());
-                }}>
+                <Link key={index} to={'/'} onClick={() => onClick(e.id)}>
                   <Row >
                     <Col
                       style={contactStyle}
@@ -126,4 +124,7 @@ class PageContact extends React.Component {
   }
 }
 
-export default PageContact;
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onClick: (id) => dispatch(switchUser(id))
+})
+export default connect(null, mapDispatchToProps)(PageContact);
