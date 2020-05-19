@@ -3,14 +3,15 @@ export const switchUser = userId => ({
   userId
 })
 
-export const sendMessage = text => ({
+export const sendMessage = (text, idRoom) => ({
   type: 'SEND_MESSAGE',
-  text
+  text,
+  idRoom
 })
 
-export const deleteMessage = id => ({
-  type: 'DELETE_MESSAGE',
-  id
+export const filterInput = filterText => ({
+  type: 'FILTER_INPUT',
+  filterText
 })
 
 export const DEFAULT_USER = {

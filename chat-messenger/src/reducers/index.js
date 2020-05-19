@@ -1,10 +1,15 @@
-import { combineReducers } from 'redux';
-import { idConversation } from './conversations';
-import { messages } from './messages';
+import { combineReducers } from "redux";
+
+import contacts from "./contacts";
+import userConversation from "./userConversation";
+import messages from "./messages";
+import filterText from "./filterText";
 
 const reducers = combineReducers({
-  idConversation,
-  messages
-})
+  contacts,
+  userConversation,
+  messages,
+  filterText,
+});
 
 export default reducers;

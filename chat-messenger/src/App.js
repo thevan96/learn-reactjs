@@ -3,7 +3,6 @@ import { Row, Container } from 'reactstrap';
 
 import PageContact from './components/PageContact';
 import PageConversation from './components/PageConversation';
-import store from './store';
 
 export default class App extends React.Component {
   render() {
@@ -11,7 +10,7 @@ export default class App extends React.Component {
       <Container fluid className='App'>
         <Row>
           <PageContact />
-          <PageConversation idConversation={store.getState().idConversation}/>
+          <PageConversation />
         </Row>
       </Container>
     );
