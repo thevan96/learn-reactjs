@@ -2,7 +2,6 @@ import { Col, Input, Row } from "reactstrap";
 import React from "react";
 import { connect } from "react-redux";
 import { filterInput } from "../actions";
-import messages from "../reducers/messages";
 
 const style = {
   margin: "20px 20px",
