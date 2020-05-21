@@ -1,44 +1,65 @@
 import axios from "axios";
 
-let id = 0;
-export const addToDo = (text) => ({
-  type: "ADD_TODO",
-  id: id++,
-  text,
-});
+export const addToDo = (text) => async (dispatch) => {
+  await axios
+    .post("http://localhost:3002/todos", { text })
+    .then((res) => {
+      const { status } = res.data;
 
-export const toggleTodo = (id) => ({
-  type: "TOGGLE_TODO",
-  id,
-});
+      if (status) {
+        dispatch({
+          type: "ADD_TODO",
+          text,
+        });
+      } else {
+        console.log("Error");
+      }
+    })
+    .catch((err) => console.log(err));
+};
+
+
+export const toggleTodo = (id) => async (dispatch) => {
+  await axios
+    .patch("http://localhost:3002/todos/" + id)
+    .then((res) => {
+      const { status } = res.data;
+
+      if (status) {
+        dispatch({
+          type: "TOGGLE_TODO",
+          id,
+        });
+      } else {
+        console.log("Error");
+      }
+    })
+    .catch((err) => console.log(err));
+};
+
 
 export const visibilityFilter = (filter) => ({
   type: "SET_VISIBILITY_FILTER",
   filter,
 });
 
-export const fetchTodos = () => {
-//   let data = await getTodoApi("http://localhost:3002/todos");
-//   console.log(data);
-  return {
-    type: "FETCH_TODOS",
-    todos: getTodoApi("http://localhost:3002/todos")
-  }
+
+export const fetchApiTodos = () => async (dispatch) => {
+  await axios
+    .get("http://localhost:3002/todos")
+    .then((res) => {
+      const { todos } = res.data.data;
+
+      dispatch({
+        type: "FETCH_TODOS",
+        todos,
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 export const FIlTER = {
   SHOW_ALL: "SHOW_ALL",
   SHOW_COMPLETED: "SHOW_COMPLETED",
   SHOW_ACTIVE: "SHOW_ACTIVE",
-};
-
-const getTodoApi =  url => {
-  return axios
-    .get(url)
-    .then((rs) => {
-      return rs.data;
-    })
-    .catch((err) => {
-      return null;
-    });
 };

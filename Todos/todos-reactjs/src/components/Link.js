@@ -15,7 +15,7 @@ class Link extends React.Component {
 
 
     return (
-      <a href='/' onClick={filterTodos} className="Link">{children}</a>
+      <button onClick={filterTodos} className="Link">{children}</button>
     )
   }
 }

@@ -8,6 +8,7 @@ const route = express.Router();
 route.get("/", async (req, res) => {
   try {
     const todos = await Todo.find();
+
     res.json(Status.Success({ todos }));
   } catch (error) {
     res.json(Status.Fail(error));
@@ -21,6 +22,7 @@ route.post("/", async (req, res) => {
 
   try {
     const isCreateTodo = await newTodo.save();
+
     res.json(Status.Success(isCreateTodo));
   } catch (error) {
     res.json(Status.Fail(error));

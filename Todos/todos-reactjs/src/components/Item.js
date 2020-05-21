@@ -8,7 +8,7 @@ class Item extends React.Component {
 
     return (
       <li
-        onClick={() => toggleTodo(todo.id)}
+        onClick={() => toggleTodo(todo._id)}
         style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
       >
         {todo.text}

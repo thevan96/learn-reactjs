@@ -1,13 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import Item from "./Item";
 import * as actionCreator from "../actions";
 
 class TodoList extends React.Component {
   componentDidMount() {
-    // this.props.getApiTodos();
+    this.props.getTodos();
   }
 
   render() {
@@ -35,11 +34,12 @@ const filterTodos = (todos, status) => {
   }
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   todos: filterTodos(state.todos, state.visibilityFilter),
 });
 
-// const mapDispatchToProps = (dispatch, ownPros) => ({
-//   getApiTodos: (dispatch) =>
-// });
-export default connect(mapStateToProps, actionCreator.fetchTodos())(TodoList);
+const mapDispatchToProps = (dispatch) => ({
+  getTodos: () => dispatch(actionCreator.fetchApiTodos()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

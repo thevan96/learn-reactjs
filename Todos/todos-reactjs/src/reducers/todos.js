@@ -1,9 +1,10 @@
 let initialState = [];
+
 const todos = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_TODOS":
-      // console.log(action, 'action')
       return action.todos;
+
     case "ADD_TODO":
       return [
         ...state,
@@ -15,8 +16,9 @@ const todos = (state = initialState, action) => {
       ];
     case "TOGGLE_TODO":
       return state.map((todo) =>
-        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+        todo._id === action.id ? { ...todo, completed: !todo.completed } : todo
       );
+
     default:
       return state;
   }
