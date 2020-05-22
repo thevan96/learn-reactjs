@@ -35,7 +35,7 @@ module.exports = UserController = {
       const { email, password } = req.body;
       const userLogin = await User.find({ email, password });
 
-      if (userLogin.length) return res.json(Status.Success(userLogin));
+      if (userLogin.length) return res.json(Status.Success(userLogin[0]));
       return res.json(Status.Fail("User not found"));
     } catch (error) {
       res.json(Status.Fail(error));
