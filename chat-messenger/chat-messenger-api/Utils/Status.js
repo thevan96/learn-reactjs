@@ -1,6 +1,6 @@
-const Success = result => ({
+const Success = (result) => ({
   status: true,
-  result
+  result,
 });
 
 const Fail = (err) => ({
@@ -8,4 +8,9 @@ const Fail = (err) => ({
   message: err,
 });
 
-module.exports = { Success, Fail };
+const Error = (err) => ({
+  status: "error",
+  error: err,
+});
+
+module.exports = { Success, Fail, Error };

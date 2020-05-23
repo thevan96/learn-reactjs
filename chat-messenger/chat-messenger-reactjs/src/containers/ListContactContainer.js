@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import ListContact  from "../components/ListContact";
+import ListContact from "../components/ListContact";
 
 const mapStateToProps = (state) => ({
   listContact: state.contacts.filter(

@@ -18,8 +18,8 @@ class Login extends React.Component {
   constructor(pros) {
     super(pros);
     this.state = {
-      email: "",
-      password: "",
+      email: "gypanarila@mailinator.net",
+      password: "Pa$$w0rd!",
     };
   }
 
@@ -74,6 +74,7 @@ class Login extends React.Component {
                   name="email"
                   id="email"
                   placeholder="Email"
+                  value={this.state.email}
                   onChange={(e) => this.handleOnChange(e)}
                 />
               </FormGroup>
@@ -84,6 +85,7 @@ class Login extends React.Component {
                   name="password"
                   id="password"
                   placeholder="Password"
+                  value={this.state.password}
                   onChange={(e) => this.handleOnChange(e)}
                 />
               </FormGroup>
@@ -110,6 +112,4 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-const mapDispatchToProps = { login };
-console.log(mapDispatchToProps, typeof mapDispatchToProps);
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, { login })(Login);

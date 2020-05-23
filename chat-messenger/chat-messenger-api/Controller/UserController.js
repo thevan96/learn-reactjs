@@ -38,7 +38,7 @@ module.exports = UserController = {
       if (userLogin.length) return res.json(Status.Success(userLogin[0]));
       return res.json(Status.Fail("User not found"));
     } catch (error) {
-      res.json(Status.Fail(error));
+      res.json(Status.Error(error));
     }
   },
 };

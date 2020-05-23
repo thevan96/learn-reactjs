@@ -5,17 +5,19 @@ import PageContact from "./components/PageContact";
 import PageConversation from "./components/PageConversation";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 class App extends React.Component {
   render() {
-    // const { user } = this.props;
-    // if (user) history.push("/");
+    const { user } = this.props;
     return (
       <Container fluid className="App">
+        {user.status && <Redirect to="/"></Redirect>}
+        {user.status !== true && <Redirect to="/login"></Redirect>}
         <Row>
           <Switch>
+            {" "}
             <Route path="/" exact>
               <PageContact />
               <PageConversation />
@@ -35,4 +37,5 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
   user: state.user,
 });
-export default connect(mapStateToProps, null)(App);
+
+export default connect(mapStateToProps)(App);

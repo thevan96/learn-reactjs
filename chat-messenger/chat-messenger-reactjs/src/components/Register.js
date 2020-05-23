@@ -38,11 +38,10 @@ class Register extends React.Component {
     axios
       .post("http://localhost:3002/users", { name, email, password })
       .then((result) => {
-        console.log(result);
         if (result.data.status) {
           toast("Tài khoản đã tạo thành công");
         } else {
-          toast("Lỗi tạo tài khoản")
+          toast("Lỗi tạo tài khoản");
         }
       })
       .catch((err) => console.log(err));
