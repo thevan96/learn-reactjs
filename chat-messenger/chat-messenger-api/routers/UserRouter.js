@@ -4,7 +4,7 @@ const express = require("express");
 const route = express.Router();
 
 route.get("/:id", UserController.find);
-route.post("/", UserController.register);
+route.post("/register", UserController.register);
 route.get("/", UserController.getAll);
 route.post("/login", UserController.login);
 

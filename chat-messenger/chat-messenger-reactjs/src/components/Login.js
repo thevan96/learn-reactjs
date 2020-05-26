@@ -74,7 +74,7 @@ class Login extends React.Component {
                   name="email"
                   id="email"
                   placeholder="Email"
-                  value={this.state.email}
+                  // value={this.state.email}
                   onChange={(e) => this.handleOnChange(e)}
                 />
               </FormGroup>
@@ -85,7 +85,7 @@ class Login extends React.Component {
                   name="password"
                   id="password"
                   placeholder="Password"
-                  value={this.state.password}
+                  // value={this.state.password}
                   onChange={(e) => this.handleOnChange(e)}
                 />
               </FormGroup>

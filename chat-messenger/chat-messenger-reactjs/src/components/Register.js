@@ -36,7 +36,7 @@ class Register extends React.Component {
     e.preventDefault();
     const { name, email, password } = this.state;
     axios
-      .post("http://localhost:3002/users", { name, email, password })
+      .post("http://localhost:3002/users/register", { name, email, password })
       .then((result) => {
         if (result.data.status) {
           toast("Tài khoản đã tạo thành công");

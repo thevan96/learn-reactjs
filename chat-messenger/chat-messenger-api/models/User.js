@@ -7,10 +7,12 @@ const userSchema = new Schema(
     email: { type: String, lowercase: true, unique: true, trim: true },
     password: { type: String, required: true },
     isActive: { type: Boolean, default: true },
+    isDelete: false,
     avatar: {
       type: String,
-      default: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png'
-    }
+      default:
+        "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
+    },
   },
   {
     timestamps: true,

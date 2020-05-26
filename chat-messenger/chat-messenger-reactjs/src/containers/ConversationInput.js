@@ -29,14 +29,19 @@ class ConversationInput extends React.Component {
   }
 
   render() {
-    const { handleSubmit, userConversation } = this.props;
+    const { handleSubmit, idRoom, myUser, userConversation } = this.props;
     return (
       <Row style={rowStyle}>
         <Col xl="9" lg="12" md="12" sm="12">
           <Form
             onSubmit={(e) => {
               e.preventDefault();
-              handleSubmit(this.state.value, userConversation);
+              handleSubmit(
+                this.state.value,
+                idRoom,
+                myUser.id,
+                userConversation
+              );
               this.setState({
                 value: "",
               });
@@ -68,11 +73,14 @@ class ConversationInput extends React.Component {
   }
 }
 const mapStateToProps = (state) => ({
+  myUser: state.user,
   userConversation: state.userConversation,
+  idRoom: state.idRoom,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleSubmit: (value, idRoom) => dispatch(sendMessage(value, idRoom)),
+  handleSubmit: (value, idRoom, idSender, userConversation) =>
+    dispatch(sendMessage(value, idRoom, idSender, userConversation)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConversationInput);

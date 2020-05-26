@@ -5,6 +5,8 @@ import userConversation from "./userConversation";
 import messages from "./messages";
 import filterText from "./filterText";
 import user from "./user";
+import focusInput from "./focusInput";
+import idRoom from "./idRoom";
 
 const reducers = combineReducers({
   contacts,
@@ -12,6 +14,8 @@ const reducers = combineReducers({
   messages,
   filterText,
   user,
+  focusInput,
+  idRoom
 });
 
 export default reducers;

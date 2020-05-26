@@ -20,7 +20,7 @@ const messageStyle = {
 
 class Conversation extends React.Component {
   render() {
-    const { messages } = this.props;
+    const { messages, myUser } = this.props;
 
     return (
       <Row>
@@ -29,7 +29,7 @@ class Conversation extends React.Component {
             <Row
               key={index}
               style={
-                e.idSender === 0
+                e.idSender === myUser.id
                   ? rowStyle
                   : { ...rowStyle, justifyContent: "flex-end" }
               }
@@ -37,7 +37,7 @@ class Conversation extends React.Component {
               <div
                 key={index}
                 style={
-                  e.idSender === 0
+                  e.idSender === myUser.id
                     ? { ...messageStyle, backgroundColor: "#1900ff" }
                     : messageStyle
                 }

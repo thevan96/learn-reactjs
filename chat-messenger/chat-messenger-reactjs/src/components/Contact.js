@@ -1,10 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+import { checkIsRoom } from "../actions";
 
 const contactStyle = {
   display: "flex",
   margin: "20px 0px",
   padding: 10,
-  borderRadius: 10
+  borderRadius: 10,
 };
 
 const imageStyle = {
@@ -22,28 +24,32 @@ const logoStyle = {
 
 class Contact extends React.Component {
   render() {
-    const { avatar, name } = this.props.contact;
-    const { active, onClick, lastMessage } = this.props;
+    const { myUser, contact, userConversation } = this.props;
+    const { avatar, name, _id } = contact;
 
     return (
       <div
         style={
-          active
-            ? { ...contactStyle, backgroundColor: "#f5f2f9" }
-            : contactStyle
-        }
-        onClick={onClick}
+            _id === userConversation
+              ? { ...contactStyle, backgroundColor: "#f5f2f9" }
+              : contactStyle
+          }
+        onClick={() => this.props.checkIsRoom(myUser.id, _id)}
       >
         <div style={logoStyle}>
           <img src={avatar} alt="" style={imageStyle} />
         </div>
         <div>
           <h5>{name}</h5>
-          <div>{lastMessage}</div>
         </div>
       </div>
     );
   }
 }
 
-export default Contact;
+const mapStateToProps = (state) => ({
+  myUser: state.user,
+  userConversation: state.userConversation
+});
+
+export default connect(mapStateToProps, { checkIsRoom })(Contact);

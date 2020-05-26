@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const UserRouter = require("./routers/UserRouter");
+const RoomRouter = require("./routers/RoomRouter");
+const MessageRouter = require("./routers/MessageRouter");
 
 require("dotenv").config();
 app.use(bodyParser.json());
@@ -14,6 +16,8 @@ const PORT = process.env.PORT || 3002;
 
 // Router
 app.use("/users", UserRouter);
+app.use("/rooms", RoomRouter);
+app.use("/messages", MessageRouter);
 
 // Connect mongoose
 mongoose

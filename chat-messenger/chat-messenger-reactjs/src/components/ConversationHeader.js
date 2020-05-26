@@ -28,4 +28,5 @@ class ConversationHeader extends React.Component {
     );
   }
 }
-export default ConversationHeader;
+
+export default (ConversationHeader);

@@ -1,7 +1,7 @@
 import { Col, Input, Row } from "reactstrap";
 import React from "react";
 import { connect } from "react-redux";
-import { filterInput } from "../actions";
+import { filterInput, focusInput } from "../actions";
 
 const style = {
   margin: "20px 20px",
@@ -14,7 +14,8 @@ const inputStyle = {
 
 class ContactInput extends React.Component {
   render() {
-    const { onChange } = this.props;
+    const { onFocus, onBlur, onChange } = this.props;
+
     return (
       <Row>
         <Col style={{ style }}>
@@ -22,7 +23,9 @@ class ContactInput extends React.Component {
             type="text"
             placeholder="Search Contact"
             style={inputStyle}
-            onChange={(e) =>  onChange(e)}
+            onFocus={(e) => onFocus(e)}
+            onClick={(e) => onBlur(e)}
+            onChange={(e) => onChange(e)}
           />
         </Col>
       </Row>
@@ -30,9 +33,11 @@ class ContactInput extends React.Component {
   }
 }
 
-
-
 const mapDispatchToProps = (dispatch, ownProsp) => ({
+  onFocus: (e) => dispatch(focusInput()),
+  onBlur: (e) => {
+    dispatch(focusInput());
+  },
   onChange: (e) => dispatch(filterInput(e.target.value.trim())),
 });
 

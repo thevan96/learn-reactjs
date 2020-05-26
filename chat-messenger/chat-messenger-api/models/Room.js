@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const conversationSchema = new Schema(
+const roomSchema = new Schema(
   {
     name: { type: String, trim: true, default: "" },
+    avatar: {
+      type: String,
+    },
     isDelete: { type: Boolean, default: false },
     member: [
       {
@@ -17,4 +20,4 @@ const conversationSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("Conversation", conversationSchema);
+module.exports = mongoose.model("Room", roomSchema);

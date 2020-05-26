@@ -1,6 +1,4 @@
-const userIdConversation = 1
-
-const userConversation = (state = userIdConversation, action) => {
+const userConversation = (state = '', action) => {
   switch (action.type) {
     case "SWITCH_USER":
       return action.userId;
